@@ -4,7 +4,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="refresh" content="60">
     <title>InaCOVID-19</title>
     <!-- Bootstrap Styles-->
     <link href="assets/css/bootstrap.css" rel="stylesheet" />
@@ -14,9 +13,11 @@
     <link href="assets/css/custom-styles.css" rel="stylesheet" />
     <!-- Google Fonts-->
     <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
+
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
 </head>
 
-<body style="background-color: #66FFCC;">
+<body>
     <nav class="navbar navbar-default top-navbar" role="navigation">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
@@ -39,121 +40,44 @@
     </div>
     <!-- /. ROW  -->
 
-    <div class="row">
-        <div class="col-md-3 col-sm-12 col-xs-12">
-            <div class="panel panel-primary text-center no-boder bg-color-blue">
-                <div class="panel-body">
-                    <i class="fa fa-medkit fa-5x"></i>
-                    <h3><label id="corona-positif"></label> </h3>
-                </div>
-                <div class="panel-footer back-footer-blue">
-                    Jumlah Positif Keseluruhan
-
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3 col-sm-12 col-xs-12">
-            <div class="panel panel-primary text-center no-boder bg-color-blue">
-                <div class="panel-body">
-                    <i class="fas fa-calendar-day fa-5x"></i>
-                    <h3><label id="corona-positiftoday"></label> </h3>
-                </div>
-                <div class="panel-footer back-footer-blue">
-                    Jumlah Positif Hari ini
-
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3 col-sm-12 col-xs-12">
-            <div class="panel panel-primary text-center no-boder bg-color-blue">
-                <div class="panel-body">
-                    <i class="fas fa-virus fa-5x"></i>
-                    <h3><label id="corona-positifaktif"></label> </h3>
-                </div>
-                <div class="panel-footer back-footer-blue">
-                    Jumlah Positif Saat ini
-
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3 col-sm-12 col-xs-12">
-            <div class="panel panel-primary text-center no-boder bg-color-red">
-                <div class="panel-body">
-                    <i class="fas fa-skull-crossbones fa-5x"></i>
-                    <h3><label id="corona-meninggal"></label> </h3>
-                </div>
-                <div class="panel-footer back-footer-red">
-                    Jumlah Total Meninggal
-
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3 col-sm-12 col-xs-12">
-            <div class="panel panel-primary text-center no-boder bg-color-red">
-                <div class="panel-body">
-                    <i class="fas fa-calendar-day fa-5x"></i>
-                    <h3><label id="corona-meninggaltoday"></label> </h3>
-                </div>
-                <div class="panel-footer back-footer-red">
-                    Jumlah Meninggal Hari ini
-
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3 col-sm-12 col-xs-12">
-            <div class="panel panel-primary text-center no-boder bg-color-red">
-                <div class="panel-body">
-                    <i class="fas fa-virus-slash fa-5x"></i>
-                    <h3><label id="corona-sembuh"></label> </h3>
-                </div>
-                <div class="panel-footer back-footer-red">
-                    Jumblah Total Sembuh
-
-                </div>
+    <div class="container">
+        <div class="row">
+            <div class='issuu-embed-container'>
+                <iframe src="https://covid19.disiplin.id" frameborder="0" allowfullscreen="true"></iframe>
             </div>
         </div>
     </div>
     <footer>
-        <p>All right reserved. &copy; <a href="https://muhrizki1996.github.io/Inacovid-19">Muhammad Rizki</a> 2020</p>
+        <p>All right reserved. &copy; <a href="https://muhrizki1996.github.io/Inacovid-19">Muhammad Rizki</a> 2020
+        </p>
     </footer>
 
     <script>
-        var date = new Date();
-        var tahun = date.getFullYear();
-        var bulan = date.getMonth();
-        var tanggal = date.getDate();
-        switch (bulan) {
-            case 0: bulan = "Januari"; break;
-            case 1: bulan = "Februari"; break;
-            case 2: bulan = "Maret"; break;
-            case 3: bulan = "April"; break;
-            case 4: bulan = "Mei"; break;
-            case 5: bulan = "Juni"; break;
-            case 6: bulan = "Juli"; break;
-            case 7: bulan = "Agustus"; break;
-            case 8: bulan = "September"; break;
-            case 9: bulan = "Oktober"; break;
-            case 10: bulan = "November"; break;
-            case 11: bulan = "Desember"; break;
-        }
-        var infoTanggal = tanggal + "/" + bulan + "/" + tahun;
+        $(document).ready(function () {
+            var d = new Date();
+            var month = new Array();
+            month[0] = "Januari";
+            month[1] = "Februari";
+            month[2] = "Maret";
+            month[3] = "April";
+            month[4] = "Mei";
+            month[5] = "Juni";
+            month[6] = "Juli";
+            month[7] = "Agustus";
+            month[8] = "September";
+            month[9] = "Oktober";
+            month[10] = "November";
+            month[11] = "Desember";
 
-        // Daftar API Lainnya
-        // https://covid19.mathdro.id/api/countries/ID
-        // https://api.kawalcorona.com/indonesia/
-
-        let url = 'https://coronavirus-19-api.herokuapp.com/countries/Indonesia';
-        fetch(url)
-            .then(res => res.json())
-            .then((out) => {
-                document.getElementById("corona-positif").innerHTML = out.cases;
-                document.getElementById("corona-positiftoday").innerHTML = out.todayCases;
-                document.getElementById("corona-positifaktif").innerHTML = out.active;
-                document.getElementById("corona-meninggal").innerHTML = out.deaths;
-                document.getElementById("corona-meninggaltoday").innerHTML = out.todayDeaths;
-                document.getElementById("corona-sembuh").innerHTML = out.recovered;
-            })
-            .catch(err => { throw err });
+            $("#date").html(d.getDate() + " " + month[d.getMonth()] + " " + d.getFullYear());
+            $.ajax({
+                async: true, cache: true, url: "https://api.kawalcorona.com/indonesia/", success: function (result) {
+                    $("#corona-positif").html(result[0].positif);
+                    $("#corona-sembuh").html(result[0].sembuh);
+                    $("#corona-meninggal").html(result[0].meninggal);
+                }
+            });
+        });
     </script>
 
 </body>
