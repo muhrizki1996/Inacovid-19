@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>InaCOVID-19</title>
+    <!-- Bootstrap Styles-->
+    <link href="assets/css/bootstrap.css" rel="stylesheet" />
+    <!-- FontAwesome Styles-->
+    <link href="assets/font-awesome/css/all.css" rel="stylesheet" />
+    <!-- Custom Styles-->
+    <link href="assets/css/custom-styles.css" rel="stylesheet" />
+    <!-- Google Fonts-->
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
+</head>
+
+<body style="background-color: #66FFCC;">
+    <nav class="navbar navbar-default top-navbar" role="navigation">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="index.html">InaCOVID-19</a>
+        </div>
+    </nav>
+    <!--/. NAV TOP  -->
+
+    <div class="row">
+        <div class="col-md-12">
+            <h1 class="page-header">
+                Covid-19 <small>di Indonesia</small>
+            </h1>
+        </div>
+    </div>
+    <!-- /. ROW  -->
+
+    <div class="row">
+        <div class="col-md-3 col-sm-12 col-xs-12">
+            <div class="panel panel-primary text-center no-boder bg-color-blue">
+                <div class="panel-body">
+                    <i class="fa fa-medkit fa-5x"></i>
+                    <h3><label id="corona-positif"></label> </h3>
+                </div>
+                <div class="panel-footer back-footer-blue">
+                    Positif
+
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 col-sm-12 col-xs-12">
+            <div class="panel panel-primary text-center no-boder bg-color-blue">
+                <div class="panel-body">
+                    <i class="fas fa-calendar-day fa-5x"></i>
+                    <h3><label id="corona-positiftoday"></label> </h3>
+                </div>
+                <div class="panel-footer back-footer-blue">
+                    Hari ini
+
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 col-sm-12 col-xs-12">
+            <div class="panel panel-primary text-center no-boder bg-color-blue">
+                <div class="panel-body">
+                    <i class="fas fa-virus fa-5x"></i>
+                    <h3><label id="corona-positifaktif"></label> </h3>
+                </div>
+                <div class="panel-footer back-footer-blue">
+                    Aktif
+
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 col-sm-12 col-xs-12">
+            <div class="panel panel-primary text-center no-boder bg-color-red">
+                <div class="panel-body">
+                    <i class="fas fa-skull-crossbones fa-5x"></i>
+                    <h3><label id="corona-meninggal"></label> </h3>
+                </div>
+                <div class="panel-footer back-footer-red">
+                    Meninggal
+
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 col-sm-12 col-xs-12">
+            <div class="panel panel-primary text-center no-boder bg-color-red">
+                <div class="panel-body">
+                    <i class="fas fa-calendar-day fa-5x"></i>
+                    <h3><label id="corona-meninggaltoday"></label> </h3>
+                </div>
+                <div class="panel-footer back-footer-red">
+                    Hari ini
+
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 col-sm-12 col-xs-12">
+            <div class="panel panel-primary text-center no-boder bg-color-red">
+                <div class="panel-body">
+                    <i class="fas fa-virus-slash fa-5x"></i>
+                    <h3><label id="corona-sembuh"></label> </h3>
+                </div>
+                <div class="panel-footer back-footer-red">
+                    Sembuh
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <p>All right reserved. &copy; <a href="https://muhrizki1996.github.io/inacovid-19">Muhammad Rizki</a> 2020</p>
+    </footer>
+
+    <script>
+        var date = new Date();
+        var tahun = date.getFullYear();
+        var bulan = date.getMonth();
+        var tanggal = date.getDate();
+        switch (bulan) {
+            case 0: bulan = "Januari"; break;
+            case 1: bulan = "Februari"; break;
+            case 2: bulan = "Maret"; break;
+            case 3: bulan = "April"; break;
+            case 4: bulan = "Mei"; break;
+            case 5: bulan = "Juni"; break;
+            case 6: bulan = "Juli"; break;
+            case 7: bulan = "Agustus"; break;
+            case 8: bulan = "September"; break;
+            case 9: bulan = "Oktober"; break;
+            case 10: bulan = "November"; break;
+            case 11: bulan = "Desember"; break;
+        }
+        var infoTanggal = tanggal + "/" + bulan + "/" + tahun;
+
+        // Daftar API Lainnya
+        // https://covid19.mathdro.id/api/countries/ID
+        // https://api.kawalcorona.com/indonesia/
+
+        let url = 'https://coronavirus-19-api.herokuapp.com/countries/Indonesia';
+        fetch(url)
+            .then(res => res.json())
+            .then((out) => {
+                document.getElementById("corona-positif").innerHTML = out.cases;
+                document.getElementById("corona-positiftoday").innerHTML = out.todayCases;
+                document.getElementById("corona-positifaktif").innerHTML = out.active;
+                document.getElementById("corona-meninggal").innerHTML = out.deaths;
+                document.getElementById("corona-meninggaltoday").innerHTML = out.todayDeaths;
+                document.getElementById("corona-sembuh").innerHTML = out.recovered;
+            })
+            .catch(err => { throw err });
+    </script>
+
+</body>
+
+</html>
